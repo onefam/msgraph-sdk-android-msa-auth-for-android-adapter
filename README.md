@@ -5,7 +5,9 @@
 
 ## Overview
 
-The MSGraph SDK Android MSA Auth for Android Adapter library provides an implementation of the Authentication Interface for the Microsoft Graph SDK to use with the v2.0 authentication endpoint. You can learn more about the v2.0 authentication endpoint [here](https://azure.microsoft.com/en-us/documentation/articles/active-directory-v2-compare/). 
+The MSGraph SDK Android MSA Auth for Android Adapter library provides an implementation of the Authentication Interface for the Microsoft Graph SDK to use with the v2.0 authentication endpoint. 
+
+This authentication provider is limited in scope and is provided to facilitate development with the v2.0 authentication endpoint while development of MSAL for each platform progresses to general availability.  You can learn more about what is currently supported on the v2.0 authentication endpoint [here](https://azure.microsoft.com/documentation/articles/active-directory-v2-compare/).
 
 > **Note:** This project is intended to help developers get off the ground quickly with the [MSGraph SDK for Android](https://github.com/microsoftgraph/msgraph-sdk-android) and not to serve as an all-inclusive authentication library.
 
