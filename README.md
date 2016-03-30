@@ -5,18 +5,25 @@
 
 ## Overview
 
-The MSGraph SDK Android MSA Auth for Android Adapter library provides an implementation of the Authentication Interface for the Microsoft Graph SDK to use with the V2 Authentication Endpoint.
+The MSGraph SDK Android MSA Auth for Android Adapter library provides an implementation of the Authentication Interface for the Microsoft Graph SDK to use with the v2.0 authentication endpoint. 
 
-This authentication providers is limited in scope and are provided to facilitate development with the V2 Authentication Endpoint while development of MSAL for each platform progresses to general availability.  Please see documentation on what is currently supported on the V2 Authentication endpoint [link](https://azure.microsoft.com/en-us/documentation/articles/active-directory-v2-compare/).
+This authentication provider is limited in scope and is provided to facilitate development with the v2.0 authentication endpoint while development of MSAL for each platform progresses to general availability.  You can learn more about what is currently supported on the v2.0 authentication endpoint [here](https://azure.microsoft.com/documentation/articles/active-directory-v2-compare/).
 
-This library provides the following features login, request signing, and logout.  Features not listed are not supported or included and are the responsibility of the developer to support and implement.
+> **Note:** This project is intended to help developers get off the ground quickly with the [MSGraph SDK for Android](https://github.com/microsoftgraph/msgraph-sdk-android) and not to serve as an all-inclusive authentication library.
 
-It is encouraged to fork or use this implementation as a starting point to develop functionality specific to your needs.
+This library provides the following features
+* login
+* request signing 
+* logout  
+
+Features not listed are not supported or included and are the responsibility of the developer to support and implement.
+
+You can fork or use this implementation as a starting point to develop functionality specific to your needs.
 
 ## 1. Installation
 
 ### 1.1 Install AAR via Gradle
-Add the maven central repository to your projects build.gradle file then add a compile dependency for `com.microsoft.graph:msa-auth-for-android-adapter:0.9.+`
+Add the maven central repository to your project's build.gradle file then add a compile dependency for `com.microsoft.graph:msa-auth-for-android-adapter:0.9.+`
 
 ```gradle
 repository {
@@ -37,17 +44,22 @@ Register your application by following [these](http://graph.microsoft.io/en-us/a
 
 #### 2.1.1 Create a new application in Application Registration Portal
 
-In the [Application Registration Portal](http://apps.dev.microsoft.com/) Create a new application for the converged endpoint, which will function with both MSA and AAD accounts.
+In the [Application Registration Portal](http://apps.dev.microsoft.com/) create a new application for the converged endpoint, which will function with both MSA and AAD accounts.
+
+At the top of the app registration page note the Application Id value. This is the _client id_ we'll use in your code later on. 
 
 #### 2.1.2 Add a mobile application platform to the application
 
-Once the application has been created add platform, selecting the `Mobile Application` option.  This will create a new Mobile Application with a redirect url of `urn:ietf:wg:oauth:2.0:oob`.
+Once the application has been created select 'Add Platform' in the Platforms section and then select the `Mobile Application` option in the dialog that appears.  This creates a new mobile application with a redirect url of `urn:ietf:wg:oauth:2.0:oob`.
 
-**Note:** Make sure you scroll to the button of the page and hit the Save Button to save your platform changes.
+**Note:** Make sure you scroll to the button of the page and hit **Save** to save your platform changes.
 
 ### 2.2 Set your application Id and scopes
 
-Note that your _client id_ should look like `00000000-0000-0000-0000-000000000000`.
+In the `getClientId()` method shown below , replace the `<client-id>` placeholder with the Application Id value found on your app's registration page. It has this format: `00000000-0000-0000-0000-000000000000`. 
+
+In the `getScopes()` method, add all the Microsoft Graph permission scopes your app needs. You can find a complete list of all available permission scopes [here](https://graph.microsoft.io/docs/authorization/permission_scopes). 
+
 
 ```java
 final IAuthenticationAdapter authenticationAdapter = new MSAAuthAndroidAdapter() {
@@ -78,9 +90,9 @@ final IAuthenticationAdapter authenticationAdapter = new MSAAuthAndroidAdapter()
 
 ### 3.1 Logging In
 
-Once you have set the client-id and scopes, you need to have your application manage the sign in state of the user, so you can make requests against the Graph Service.   Use the login method to force a user login, during the login flow the user will consent to use the application.
+Once you have set the client-id and scopes, you need to have your application manage the sign-in state of the user, so you can make requests against the Microsoft Graph servicee. Use the login method to force a user login, during the login flow the user will consent to use the application.
 
-Once the authorization flow is completed the callback provided will be called returning the flow of control back to the application.
+Once the authorization flow is completed the callback provided will be called, returning the flow of control back to the application.
 
 ```java
 authenticationAdapter.login(getActivity(), new ICallback<Void>() {
@@ -114,7 +126,7 @@ authenticationAdapter.logout(new ICallback<Void>() {
 
 ### 3.3 Integration with Graph Service client
 
-Once the application has signed in a account to access to Graph Service the application should create a `GraphServiceClient` to issue requests with.
+Once the application has signed in, create a `GraphServiceClient` instance so that you can issue service requests.
 
 ```java
 // Use the authentication provider previously defined within the project and create a configuration instance
@@ -165,7 +177,7 @@ For known issues, see [issues](https://github.com/microsoftgraph/msgraph-sdk-and
 The MSGraph SDK Android MSA Auth for Android Adapter is open for contribution for bug fixes.  This project is intended to help developers get off the ground quickly with the [MSGraph SDK for Android](https://github.com/microsoftgraph/msgraph-sdk-android) and not to serve as an all inclusive authentication library.
 
 ## 6. Supported Android Versions
-The OneDrive SDK for Android library is supported at runtime for [Android API revision 15](http://source.android.com/source/build-numbers.html) and greater. To build the sdk you need to install Android API revision 23 or greater.
+This library is supported at runtime for [Android API revision 15](http://source.android.com/source/build-numbers.html) and greater. To build the sdk you need to install Android API revision 23 or greater.
 
 ## 7. License
 
