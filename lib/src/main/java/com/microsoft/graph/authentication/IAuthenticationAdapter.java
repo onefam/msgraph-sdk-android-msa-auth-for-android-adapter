@@ -27,4 +27,11 @@ public interface IAuthenticationAdapter extends IAuthenticationProvider  {
      * @param callback The callback when the login is complete or an error occurs
      */
     void login(final Activity activity, final ICallback<Void> callback);
+
+    /**
+     * Login a user with no ui
+     *
+     * @param callback The callback when the login is complete or an error occurs
+     */
+    void loginSilent(final ICallback<Void> callback);
 }
