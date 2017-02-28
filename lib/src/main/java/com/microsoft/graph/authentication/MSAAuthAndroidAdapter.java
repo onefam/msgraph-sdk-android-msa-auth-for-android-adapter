@@ -214,6 +214,7 @@ public abstract class MSAAuthAndroidAdapter implements IAuthenticationAdapter {
      *
      * @param callback The callback when the login is complete or an error occurs
      */
+    @Override
     public void loginSilent(final ICallback<Void> callback) {
         mLogger.logDebug("Login silent started");
 
